@@ -1,0 +1,33 @@
+version = '1.0.0'
+buildscript { dependencies { classpath "cn.msec.osgi:gpojo:1.0.1" } }
+
+apply plugin: 'gpojo'
+apply plugin: 'eclipse-wtp'
+project.group='com.rmitec.csd'
+dependencies {
+	compile 'org.projectlombok:lombok:1.16.2'
+	//compile 'org.json:json:20090211'
+	//compile 'cn.msec.osgi:cn.msec.osgi.ofw:1.0.1'
+}
+sourceSets{
+	main{
+		java{
+			srcDirs 'src/main/java'
+			srcDirs 'src/main/resources'
+			srcDirs 'src/gens/java'
+			srcDirs 'src/main/rm'
+		}
+		resources {
+			srcDirs 'src/resources'
+			srcDirs 'src/gens/resources'
+		}
+	}
+}
+jar {
+	manifest{
+		//attributes( 'Import-Ignore':'com.google.protobuf,com.esotericsoftware.kryo')
+		//attributes( 'Import-Ignore':'org.json')
+		attributes( 'DynamicImport-Package': '*')
+		attributes( 'Import-Lib': 'lib')	
+	}
+}
